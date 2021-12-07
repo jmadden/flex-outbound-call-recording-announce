@@ -1,5 +1,5 @@
 {
-  "name": "outbount-call-config",
+  "name": "outbound-call-config",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -9,12 +9,13 @@
   },
   "dependencies": {
     "twilio": "^3.56",
-    "@twilio/runtime-handler": "1.2.1"
+    "@twilio/runtime-handler": "1.2.1",
+    "twilio-flex-token-validator": "^1.5.3"
   },
   "devDependencies": {
     "twilio-run": "^3.4.0"
   },
   "engines": {
-    "node": "12"
+    "node": "14"
   }
 }

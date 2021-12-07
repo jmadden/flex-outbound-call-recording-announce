@@ -1,7 +1,7 @@
 import { Manager } from '@twilio/flex-ui';
 const manager = Manager.getInstance();
 
-const updateConference = async (conferenceSid, announceUrl) => {
+export const updateConference = async (conferenceSid, announceUrl) => {
   console.debug('Updating Conference:', conferenceSid);
   const fetchUrl = `${process.env.FLEX_APP_FUNCTIONS_BASE}/update-conference`;
   const fetchBody = {
@@ -27,5 +27,3 @@ const updateConference = async (conferenceSid, announceUrl) => {
   }
   return conference;
 };
-
-export default updateConference;

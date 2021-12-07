@@ -18,19 +18,6 @@ export default class OutboundRecordingPlugin extends FlexPlugin {
    * @param manager { import('@twilio/flex-ui').Manager }
    */
   async init(flex, manager) {
-    flex.Actions.addListener('beforeStartOutboundCall', async (payload) => {
-      console.log(PLUGIN_NAME, 'BEFORE StartOutboundCall payload:', payload);
-
-      let newCallerId =
-        manager.store.getState()['outbound-callerid'].NumberSelect.phoneNumber;
-      if (newCallerId) {
-        payload.callerId = newCallerId;
-      } else {
-        //No caller id selected yet...
-      }
-      console.log(PLUGIN_NAME, 'Outbound Caller Id:', payload.callerId);
-    });
-
     const isTaskActive = (task) => {
       const { sid: reservationSid, taskStatus } = task;
       if (taskStatus === 'canceled') {
@@ -124,8 +111,7 @@ export default class OutboundRecordingPlugin extends FlexPlugin {
       //Should be same as conf sid from task...
       console.log(PLUGIN_NAME, 'Conference Task Data:', task);
       const conferenceSid = task.attributes.conference.sid;
-      const announceUrl =
-        'https://handler.twilio.com/twiml/EHf04f98deab4ed4ec514fde9365a92231';
+      const announceUrl = process.env.FLEX_APP_ANNOUNCE_TWIML_BIN;
       const conf = await updateConference(confSid, announceUrl);
       console.log(PLUGIN_NAME, 'Updated Conference:', conf);
     };
